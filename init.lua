@@ -13,15 +13,24 @@ local packer_bootstrap = ensure_packer()
 require("core.options")
 require("core.keymaps")
 require("core.remaps")
+
 -- Plugins setup
 require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
+	use("AndrewRadev/splitjoin.vim")
 	-- Comment plugin
 	use({
 		"numToStr/Comment.nvim",
 		config = function()
 			require("plugins.comment")
+		end,
+	})
+
+	use({
+		"L3MON4D3/LuaSnip",
+		config = function()
+			require("plugins.snippets")
 		end,
 	})
 
@@ -103,6 +112,13 @@ require("packer").startup(function(use)
 		"windwp/nvim-autopairs",
 		config = function()
 			require("plugins.autopairs").setup()
+		end,
+	})
+
+	use({
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
 		end,
 	})
 
