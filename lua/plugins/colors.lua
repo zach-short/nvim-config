@@ -5,8 +5,8 @@ require("rose-pine").setup({
 	extend_background_behind_borders = true,
 	enable = {
 		terminal = true,
-		legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
-		migrations = true, -- Handle deprecated options automatically
+		legacy_highlights = true,
+		migrations = true,
 	},
 	styles = {
 		bold = true,
@@ -41,7 +41,6 @@ require("rose-pine").setup({
 		h6 = "foam",
 	},
 	palette = {
-		-- Override the builtin palette per variant
 		-- moon = {
 		--     base = '#18191a',
 		--     overlay = '#363738',
@@ -54,12 +53,10 @@ require("rose-pine").setup({
 		Visual = { fg = "base", bg = "text", inherit = false },
 	},
 	before_highlight = function(group, highlight, palette)
-		-- Disable all undercurls
 		-- if highlight.undercurl then
 		--     highlight.undercurl = false
 		-- end
 		--
-		-- Change palette colour
 		-- if highlight.fg == palette.pine then
 		--     highlight.fg = palette.foam
 		-- end

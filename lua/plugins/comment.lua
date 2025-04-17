@@ -2,12 +2,12 @@ return require("Comment").setup({
 	padding = true,
 	sticky = true,
 	toggler = {
-		line = "gcc", -- Toggle comment for current line
-		block = "gbc", -- Toggle block comment
+		line = "gcc",
+		block = "gbc",
 	},
 	opleader = {
-		line = "gc", -- Operator for line comments
-		block = "gb", -- Operator for block comments
+		line = "gc",
+		block = "gb",
 	},
 	mappings = {
 		basic = true,

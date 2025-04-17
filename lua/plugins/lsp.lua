@@ -5,11 +5,8 @@
 
 local M = {}
 
--- Define the setup function that will be called from init.lua
 M.setup = function()
-	-- Set up nvim-cmp capabilities
 	local capabilities = require("cmp_nvim_lsp").default_capabilities()
-	-- Initialize Mason first
 	require("mason").setup({
 		ui = {
 			icons = {
@@ -19,14 +16,11 @@ M.setup = function()
 			},
 		},
 	})
-	-- Then set up Mason-LSPConfig
 	require("mason-lspconfig").setup({
 		ensure_installed = { "lua_ls" }, -- We'll handle TS server separately
 	})
-	-- Diagnostic keymaps
 	vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 	vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-	-- Configure diagnostic display
 	vim.diagnostic.config({
 		virtual_text = true,
 		signs = true,
@@ -37,26 +31,19 @@ M.setup = function()
 			border = "rounded",
 		},
 	})
-	-- LSP handlers configuration
+
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 		border = "rounded",
 	})
+
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
 		border = "rounded",
 	})
 
-	-- Use an on_attach function to only map the following keys
-	-- after the language server attaches to the current buffer
-	local on_attach = function(client, bufnr)
-		-- Enable completion triggered by <c-x><c-o>
-		vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-
-		-- Key mappings
+	local on_attach = function(bufnr)
 		local bufopts = { noremap = true, silent = true, buffer = bufnr }
-		-- hover (show documentation)
 		vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true, desc = "show documentation" })
 
-		-- show signature help (function signatures)
 		vim.keymap.set(
 			"n",
 			"<C-k>",
@@ -64,7 +51,6 @@ M.setup = function()
 			{ noremap = true, silent = true, desc = "show signature help" }
 		)
 
-		-- add a workspace folder
 		vim.keymap.set(
 			"n",
 			"<leader>wa",
@@ -72,7 +58,6 @@ M.setup = function()
 			{ noremap = true, silent = true, desc = "add workspace folder" }
 		)
 
-		-- remove a workspace folder
 		vim.keymap.set(
 			"n",
 			"<leader>wr",
@@ -80,12 +65,10 @@ M.setup = function()
 			{ noremap = true, silent = true, desc = "remove workspace folder" }
 		)
 
-		-- list workspace folders
 		vim.keymap.set("n", "<leader>wl", function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 		end, { noremap = true, silent = true, desc = "list workspace folders" })
 
-		-- go to type definition
 		vim.keymap.set(
 			"n",
 			"<leader>D",
@@ -93,10 +76,8 @@ M.setup = function()
 			{ noremap = true, silent = true, desc = "go to type definition" }
 		)
 
-		-- rename symbol
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "rename symbol" })
 
-		-- code action (quick fixes)
 		vim.keymap.set(
 			"n",
 			"<leader>ca",
@@ -104,10 +85,8 @@ M.setup = function()
 			{ noremap = true, silent = true, desc = "code action" }
 		)
 
-		-- go to references
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true, desc = "go to references" })
 
-		-- Jump definitions
 		vim.keymap.set(
 			"n",
 			"<leader>jg",
@@ -151,21 +130,17 @@ M.setup = function()
 		end, bufopts)
 	end
 
-	-- Get LSPConfig
 	local lspconfig = require("lspconfig")
 
-	-- Setup servers with capabilities for autocompletion
 	lspconfig.lua_ls.setup({
 		on_attach = on_attach,
-		capabilities = capabilities, -- Add nvim-cmp capabilities
+		capabilities = capabilities,
 		settings = {
 			Lua = {
 				diagnostics = {
-					-- Recognize the vim global
 					globals = { "vim" },
 				},
 				workspace = {
-					-- Make the server aware of Neovim runtime files
 					library = vim.api.nvim_get_runtime_file("", true),
 					checkThirdParty = false,
 				},
@@ -176,29 +151,26 @@ M.setup = function()
 		},
 	})
 
-	-- Try TypeScript server - first try ts_ls (new name)
 	local ts_ok = pcall(function()
 		lspconfig.ts_ls.setup({
 			on_attach = on_attach,
-			capabilities = capabilities, -- Add nvim-cmp capabilities
+			capabilities = capabilities,
 		})
 	end)
 
-	-- If that fails, try tsserver (old name)
 	if not ts_ok then
 		pcall(function()
 			lspconfig.tsserver.setup({
 				on_attach = on_attach,
-				capabilities = capabilities, -- Add nvim-cmp capabilities
+				capabilities = capabilities,
 			})
 		end)
 	end
 
-	-- Setup Tailwind CSS server
 	pcall(function()
 		lspconfig.tailwindcss.setup({
 			on_attach = on_attach,
-			capabilities = capabilities, -- Add nvim-cmp capabilities
+			capabilities = capabilities,
 		})
 	end)
 end

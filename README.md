@@ -100,21 +100,7 @@ or LSP, you can find their respective configurations in the lua/plugins/
 folder.
 
 Keybindings
-Here are some of the keybindings I use:
-
-gcc - Comment handling, allows for directional inputs such as gc2j to comment out current line and 2 lines down.
-
-<leader>ff - Open Telescope file finder.
-<leader>ff - Open Telescope file finder.
-
-<leader>jf - Jump to defintion.
-<leader>jb - Jump back after jumping to a defition.
-
-<leader>fg - Search for a Git file.
-
-<leader>bb - Open Telescope buffer list.
-
-<leader>tf - Open floating terminal, there are others like side and bottom terminal.
+All of my non-native vim commands can be found in the keymap-list.txt.
 
 Troubleshooting
 If Packer doesn't install properly, try running :PackerSync again.
