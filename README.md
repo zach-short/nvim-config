@@ -20,14 +20,16 @@ manage your Neovim configurations.
 git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim
 ```
 
-2. Install Packer
-   The configuration uses Packer as the plugin manager. If Packer is not
-   installed, it will be installed automatically the first time you run Neovim
-   with this config.
+### 2. Install Packer
 
-3. Install the plugins
-   Once you've cloned the repository, open Neovim and run the following command
-   to install all the plugins:
+The configuration uses Packer as the plugin manager. If Packer is not
+installed, it will be installed automatically the first time you run Neovim
+with this config.
+
+### 3. Install the plugins
+
+Once you've cloned the repository, open Neovim and run the following command
+to install all the plugins:
 
 ```bash
 :PackerSync
@@ -103,17 +105,19 @@ folder.
 Keybindings
 Here are some of the keybindings I use:
 
-gcc - Comment the current line.
-
-gc - Comment a block of code (visual mode).
+gcc - Comment handling, allows for directional inputs such as gc2j to comment out current line and 2 lines down.
 
 <leader>ff - Open Telescope file finder.
+<leader>ff - Open Telescope file finder.
+
+<leader>jf - Jump to defintion.
+<leader>jb - Jump back after jumping to a defition.
 
 <leader>fg - Search for a Git file.
 
 <leader>bb - Open Telescope buffer list.
 
-<leader>t - Toggle terminal with Toggleterm.
+<leader>tf - Open floating terminal, there are others like side and bottom terminal.
 
 Troubleshooting
 If Packer doesn't install properly, try running :PackerSync again.
