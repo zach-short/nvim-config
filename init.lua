@@ -12,7 +12,6 @@ end
 local packer_bootstrap = ensure_packer()
 require("core.options")
 require("core.keymaps")
-require("core.remaps")
 
 -- plugins
 require("packer").startup(function(use)

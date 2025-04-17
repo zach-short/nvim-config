@@ -53,6 +53,59 @@ M.setup = function()
 
 		-- Key mappings
 		local bufopts = { noremap = true, silent = true, buffer = bufnr }
+		-- hover (show documentation)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true, desc = "show documentation" })
+
+		-- show signature help (function signatures)
+		vim.keymap.set(
+			"n",
+			"<C-k>",
+			vim.lsp.buf.signature_help,
+			{ noremap = true, silent = true, desc = "show signature help" }
+		)
+
+		-- add a workspace folder
+		vim.keymap.set(
+			"n",
+			"<leader>wa",
+			vim.lsp.buf.add_workspace_folder,
+			{ noremap = true, silent = true, desc = "add workspace folder" }
+		)
+
+		-- remove a workspace folder
+		vim.keymap.set(
+			"n",
+			"<leader>wr",
+			vim.lsp.buf.remove_workspace_folder,
+			{ noremap = true, silent = true, desc = "remove workspace folder" }
+		)
+
+		-- list workspace folders
+		vim.keymap.set("n", "<leader>wl", function()
+			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+		end, { noremap = true, silent = true, desc = "list workspace folders" })
+
+		-- go to type definition
+		vim.keymap.set(
+			"n",
+			"<leader>D",
+			vim.lsp.buf.type_definition,
+			{ noremap = true, silent = true, desc = "go to type definition" }
+		)
+
+		-- rename symbol
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "rename symbol" })
+
+		-- code action (quick fixes)
+		vim.keymap.set(
+			"n",
+			"<leader>ca",
+			vim.lsp.buf.code_action,
+			{ noremap = true, silent = true, desc = "code action" }
+		)
+
+		-- go to references
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = true, desc = "go to references" })
 
 		-- Jump definitions
 		vim.keymap.set(
@@ -61,8 +114,7 @@ M.setup = function()
 			vim.lsp.buf.declaration,
 			{ desc = "Jump to global declaration", buffer = bufnr }
 		)
-		vim.keymap.set("n", "<leader>jf", vim.lsp.buf.definition,
-			{ desc = "Jump to local definition", buffer = bufnr })
+		vim.keymap.set("n", "<leader>jf", vim.lsp.buf.definition, { desc = "Jump to local definition", buffer = bufnr })
 		vim.keymap.set(
 			"n",
 			"<leader>jp",
