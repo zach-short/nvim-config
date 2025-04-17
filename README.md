@@ -1,8 +1,6 @@
 # Neovim Configuration
 
-This is my custom Neovim configuration, designed to be fast, efficient, and
-highly customizable for development. It includes essential plugins for code
-completion, linting, syntax highlighting, version control, and more.
+This is my Neovim configuration, I tried to keep it as minimal as possible while meeting the basic necessities of an IDE.
 
 ## Prerequisites
 
@@ -11,10 +9,9 @@ completion, linting, syntax highlighting, version control, and more.
 
 ## Installation
 
-### 1. Clone the repository
+### 1. Fork the repository
 
-Clone this repository into your `~/.config/nvim` directory or wherever you
-manage your Neovim configurations.
+I recommend forking this repository so it is unique to your preferences, then clone that repo down.
 
 ```bash
 git clone https://github.com/yourusername/nvim-config.git ~/.config/nvim
@@ -53,7 +50,7 @@ LuaSnip - Snippet engine.
 
 Undotree - Visualize undo history.
 
-Rose-pine - Beautiful color scheme.
+Rose-pine - Color scheme.
 
 Telescope.nvim - Fuzzy finder for files, buffers, etc.
 
