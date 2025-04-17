@@ -14,8 +14,8 @@ vim.keymap.set(
   { noremap = true, silent = true, desc = "edit init.lua" }
 )
 
--- reload nvim config with <leader>sv
-vim.keymap.set("n", "<leader>sv", function()
+-- reload nvim config with <leader>save
+vim.keymap.set("n", "<leader>save", function()
   if vim.fn.expand("%:p") == vim.fn.stdpath("config") .. "/init.lua" then
     vim.cmd("write")
   end
@@ -163,3 +163,6 @@ vim.keymap.set("n", "<leader>jn", "<C-i>zz", { noremap = true, silent = true, de
 
 vim.keymap.set("n", "<leader>h", "<C-w>h", { noremap = true, desc = "Move to left split" })
 vim.keymap.set("n", "<leader>l", "<C-w>l", { noremap = true, desc = "Move to right split" })
+
+-- open terminal
+vim.keymap.set("n", "<leader>sv", ":vsplit", { noremap = true, silent = true, desc = "edit init.lua" })
