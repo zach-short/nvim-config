@@ -157,3 +157,7 @@ require("packer").startup(function(use)
     require("packer").sync()
   end
 end)
+
+vim.o.splitright = true
+
+-- this is a test

@@ -6,21 +6,21 @@ vim.g.mapleader = " "
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { noremap = true, silent = true, desc = "clear search highlights" })
 
--- quickly edit the init.lua configuration with <leader>ev
+-- quickly edit the init.lua configuration with <leader>init
 vim.keymap.set(
-  "n",
-  "<leader>ev",
-  ":e ~/.config/nvim/init.lua<CR>",
-  { noremap = true, silent = true, desc = "edit init.lua" }
+	"n",
+	"<leader>init",
+	":e ~/.config/nvim/init.lua<CR>",
+	{ noremap = true, silent = true, desc = "edit init.lua" }
 )
 
--- reload nvim config with <leader>save
-vim.keymap.set("n", "<leader>save", function()
-  if vim.fn.expand("%:p") == vim.fn.stdpath("config") .. "/init.lua" then
-    vim.cmd("write")
-  end
-  vim.cmd("source ~/.config/nvim/init.lua")
-  print("neovim configuration reloaded!")
+-- reload nvim config with <leader>sinit
+vim.keymap.set("n", "<leader>sinit", function()
+	if vim.fn.expand("%:p") == vim.fn.stdpath("config") .. "/init.lua" then
+		vim.cmd("write")
+	end
+	vim.cmd("source ~/.config/nvim/init.lua")
+	print("neovim configuration reloaded!")
 end, { noremap = true, silent = true, desc = "source init.lua" })
 
 -- ============================
@@ -29,9 +29,9 @@ end, { noremap = true, silent = true, desc = "source init.lua" })
 
 -- change the working directory to the current file's directory with <leader>cd
 vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>", {
-  noremap = true,
-  silent = false,
-  desc = "change working directory to current file",
+	noremap = true,
+	silent = false,
+	desc = "change working directory to current file",
 })
 
 -- ============================
@@ -40,10 +40,10 @@ vim.keymap.set("n", "<leader>cd", ":cd %:p:h<CR>:pwd<CR>", {
 
 -- open terminal in split
 vim.keymap.set(
-  "n",
-  "<leader>t",
-  ":split | terminal<CR>",
-  { noremap = true, silent = true, desc = "open terminal in split" }
+	"n",
+	"<leader>t",
+	":split | terminal<CR>",
+	{ noremap = true, silent = true, desc = "open terminal in split" }
 )
 
 -- ============================
@@ -102,39 +102,39 @@ vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true, des
 
 -- show signature help (function signatures)
 vim.keymap.set(
-  "n",
-  "<C-k>",
-  vim.lsp.buf.signature_help,
-  { noremap = true, silent = true, desc = "show signature help" }
+	"n",
+	"<C-k>",
+	vim.lsp.buf.signature_help,
+	{ noremap = true, silent = true, desc = "show signature help" }
 )
 
 -- add a workspace folder
 vim.keymap.set(
-  "n",
-  "<leader>wa",
-  vim.lsp.buf.add_workspace_folder,
-  { noremap = true, silent = true, desc = "add workspace folder" }
+	"n",
+	"<leader>wa",
+	vim.lsp.buf.add_workspace_folder,
+	{ noremap = true, silent = true, desc = "add workspace folder" }
 )
 
 -- remove a workspace folder
 vim.keymap.set(
-  "n",
-  "<leader>wr",
-  vim.lsp.buf.remove_workspace_folder,
-  { noremap = true, silent = true, desc = "remove workspace folder" }
+	"n",
+	"<leader>wr",
+	vim.lsp.buf.remove_workspace_folder,
+	{ noremap = true, silent = true, desc = "remove workspace folder" }
 )
 
 -- list workspace folders
 vim.keymap.set("n", "<leader>wl", function()
-  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end, { noremap = true, silent = true, desc = "list workspace folders" })
 
 -- go to type definition
 vim.keymap.set(
-  "n",
-  "<leader>D",
-  vim.lsp.buf.type_definition,
-  { noremap = true, silent = true, desc = "go to type definition" }
+	"n",
+	"<leader>D",
+	vim.lsp.buf.type_definition,
+	{ noremap = true, silent = true, desc = "go to type definition" }
 )
 
 -- rename symbol
@@ -148,7 +148,7 @@ vim.keymap.set("n", "gr", vim.lsp.buf.references, { noremap = true, silent = tru
 
 -- format code (lsp)
 vim.keymap.set("n", "<leader>f", function()
-  vim.lsp.buf.format({ async = true })
+	vim.lsp.buf.format({ async = true })
 end, { noremap = true, silent = true, desc = "format code" })
 
 -- ============================
@@ -165,4 +165,4 @@ vim.keymap.set("n", "<leader>h", "<C-w>h", { noremap = true, desc = "Move to lef
 vim.keymap.set("n", "<leader>l", "<C-w>l", { noremap = true, desc = "Move to right split" })
 
 -- open terminal
-vim.keymap.set("n", "<leader>sv", ":vsplit", { noremap = true, silent = true, desc = "edit init.lua" })
+vim.keymap.set("n", "<leader>sv", ":vsplit<CR>", { noremap = true, silent = true, desc = "edit init.lua" })
