@@ -5,13 +5,16 @@ local i = ls.insert_node
 local f = ls.function_node
 
 local react_snippets = {
+	-- className
 	s({ trig = ";cl" }, {
 		t("className={`"),
 		i(1, ""),
 		t("`}"),
 	}),
+
+	-- style
 	s({ trig = ";st" }, {
-		t("style={{"),
+		t("={{"),
 		i(1, ""),
 		t("}}"),
 	}),
@@ -30,6 +33,14 @@ local react_js_ts_snippets = {
 			return args[1][1] or ""
 		end, { 1 }),
 		t(")"),
+	}),
+
+	-- useEffect
+	s({ trig = ";ue" }, {
+		t("useEffect(()=> {"),
+		i(1, ""),
+		t("};"),
+		t("},[])"),
 	}),
 }
 
