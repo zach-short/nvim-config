@@ -37,10 +37,12 @@ M.setup = function()
       border = "rounded",
     },
   })
+
   -- LSP handlers configuration
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     border = "rounded",
   })
+
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
   })
@@ -176,29 +178,72 @@ M.setup = function()
     },
   })
 
-  -- Try TypeScript server - first try ts_ls (new name)
   local ts_ok = pcall(function()
     lspconfig.ts_ls.setup({
       on_attach = on_attach,
-      capabilities = capabilities, -- Add nvim-cmp capabilities
+      capabilities = capabilities,
     })
   end)
 
-  -- If that fails, try tsserver (old name)
   if not ts_ok then
     pcall(function()
       lspconfig.tsserver.setup({
         on_attach = on_attach,
-        capabilities = capabilities, -- Add nvim-cmp capabilities
+        capabilities = capabilities,
       })
     end)
   end
 
-  -- Setup Tailwind CSS server
+  pcall(function()
+    lspconfig.golangci_lint_ls.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+    })
+  end)
+
+  pcall(function()
+    lspconfig.gopls.setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+    })
+  end)
+
   pcall(function()
     lspconfig.tailwindcss.setup({
       on_attach = on_attach,
-      capabilities = capabilities, -- Add nvim-cmp capabilities
+      capabilities = capabilities,
+    })
+  end)
+
+  pcall(function()
+    local jdtls_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
+
+    lspconfig.jdtls.setup({
+      cmd = { jdtls_path .. "/bin/jdtls" },
+      on_attach = on_attach,
+      capabilities = capabilities,
+      root_dir = require("lspconfig.util").root_pattern(".git", "mvnw", "gradlew", "pom.xml", "build.gradle"),
+      settings = {
+        java = {
+          signatureHelp = { enabled = true },
+          contentProvider = { preferred = "fernflower" },
+          completion = {
+            favoriteStaticMembers = {
+              "java.util.Objects.requireNonNull",
+              "java.util.Arrays.asList",
+            },
+          },
+          sources = {
+            organizeImports = {
+              starThreshold = 9999,
+              staticStarThreshold = 9999,
+            },
+          },
+          configuration = {
+            updateBuildConfiguration = "interactive",
+          },
+        },
+      },
     })
   end)
 end

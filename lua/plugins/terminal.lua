@@ -4,7 +4,6 @@
 ------------------
 
 local toggleterm = require("toggleterm")
-
 toggleterm.setup({
 	size = 15,
 	open_mapping = [[<c-\>]],
@@ -18,6 +17,11 @@ toggleterm.setup({
 	direction = "float", -- 'horizontal', 'vertical', 'float', 'tab'
 	close_on_exit = true,
 	shell = vim.o.shell,
+	width = function(term)
+		if term.direction == "vertical" then
+			return vim.o.columns * 0.5 -- 50% of screen width
+		end
+	end,
 	float_opts = {
 		border = "curved",
 		winblend = 0,
@@ -28,7 +32,6 @@ toggleterm.setup({
 	},
 })
 
--- Terminal keymaps
 function _G.set_terminal_keymaps()
 	local opts = { noremap = true }
 	vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
@@ -39,6 +42,16 @@ function _G.set_terminal_keymaps()
 end
 
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+
+vim.keymap.set("n", "<leader>tt", ":tabnew | term<CR>", { noremap = true, silent = true, desc = "New terminal tab" })
+
+vim.keymap.set("n", "<leader>t1", function()
+	require("toggleterm.terminal").Terminal:new({ cmd = "zsh", count = 1 }):toggle()
+end, { noremap = true, silent = true, desc = "Toggle Term 1" })
+
+vim.keymap.set("n", "<leader>t2", function()
+	require("toggleterm.terminal").Terminal:new({ cmd = "zsh", count = 2 }):toggle()
+end, { noremap = true, silent = true, desc = "Toggle Term 2" })
 
 vim.keymap.set(
 	"n",
