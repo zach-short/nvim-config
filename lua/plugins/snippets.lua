@@ -150,6 +150,19 @@ local go_snippets = {
     t({ "", "}" }),
   }),
 
+  s({ trig = ";errc" }, {
+    t("if err != nil {"),
+    t({ "", "\tc.JSON(http." }),
+    i(1, "StatusInternalServerError"),
+    t(', gin.H{"'),
+    i(2, "error"),
+    t('": "'),
+    i(3, ""),
+    t('"})'),
+    t({ "", "\treturn" }),
+    t({ "", "}" }),
+  }),
+
   s({ trig = ";func" }, {
     t("func "),
     i(1, "functionName"),
